@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section class="px-24">
+        <div class="grid grid-cols-2 gap-4 py-16">
+            <div class="bg-gray-100 py-16 px-8 rounded-lg">
+                <h1 class="text-center font-bold text-2xl">BMI</h1>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="py-2 w-full">
+                        <input name="age"
+                               class="p-2 px-4 w-full border block rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               type="text" placeholder="Yosh">
+                    </div>
+                    <div class="py-2">
+                        <input name="height"
+                               class="p-2 w-full px-4 border rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               type="text" placeholder="Bo'y uzunligi">
+                    </div>
+                    <div class="py-2">
+                        <input name="weight"
+                               class="p-2 w-full px-4 border rounded-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                               type="text" placeholder="Vazn">
+                    </div>
+                    <div class="py-2">
+                        <button
+                                class="p-2 w-full px-4 bg-blue-600 hover:bg-blue-500 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                type="submit">Hisoblash
+                        </button>
+                    </div>
+                </form>
+            </div>
+            {% if t %}
+                <div class="bg-gray-100 rounded-lg px-8">
+                    <h1 class="text-center font-bold text-2xl pt-16">Natija</h1>
+                    <p class="text-xl flex"><img width="30" class="me-2" height="30"
+                                                 src="https://img.icons8.com/offices/30/age.png" alt="age"/> Yosh: <span
+                            class="font-bold">{{ age }}</span></p>
+                    <p class="text-xl py-8 flex"><img class="me-2" width="30" height="30"
+                                                      src="https://img.icons8.com/officel/30/height.png" alt="height"/>Bo'y
+                        uzunligi: <span class="font-bold">{{ height }}sm</span></p>
+                    <p class="text-xl py-4 flex"><img class="me-2" width="30" height="30"
+                                                      src="https://img.icons8.com/external-wanicon-flat-wanicon/30/external-weight-health-checkup-wanicon-flat-wanicon.png"
+                                                      alt="external-weight-health-checkup-wanicon-flat-wanicon"/>Vazn:
+                        <span
+                                class="font-bold">{{ weight }}kg</span></p>
+                    <p class="text-center text-2xl py-4 bg-gray-200 rounded-lg"><span
+                            class="font-bold flex justify-center"><img
+                            width="28" class="me-2" height="28"
+                            src="https://img.icons8.com/external-flaticons-lineal-color-flat-icons/28/external-body-mass-index-fitness-and-healthy-living-flaticons-lineal-color-flat-icons-3.png"
+                            alt="external-body-mass-index-fitness-and-healthy-living-flaticons-lineal-color-flat-icons-3"/>{{ bmi }}kg/m<sup
+                            class="top-0">2</sup></span>
+                    </p>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="px-24">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            {% if foods %}
+                <table class="w-full text-sm text-left text-gray-500">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            <span class="sr-only">Image</span>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Oziq ovqat
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Kaloryasi
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            BMI
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for food in foods %}
+                        <tr class="bg-white border-b hover:bg-gray-50">
+                            <td class="w-32 p-4">
+                                <img class="rounded-lg" src="{{ food.image.url }}" alt="Food Image">
+                            </td>
+                            <td class="px-6 py-4 font-bold text-gray-900">
+                                {{ food.name }}
+                            </td>
+                            <td class="px-6 py-4 font-bold text-gray-900">
+                                {{ food.calorie }}
+                            </td>
+                            <td class="px-6 py-4 font-bold text-gray-900">
+                                {{ food.bmi_start }} to {{ food.bmi_end }}
+                            </td>
+
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}
