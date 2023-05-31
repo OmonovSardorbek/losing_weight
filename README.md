@@ -5,7 +5,7 @@
 ### Setup
 The first thing to do is to clone the repository:
 ```sh
-$ git clone https://github.com/OmonovSardorbek/Losing-Weight.git
+$ git clone https://github.com/OmonovSardorbek/losing_weight.git
 $ cd /losing_weight
 ```
 Create a virtual environment to install dependencies in and activate it:
